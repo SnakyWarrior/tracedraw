@@ -4,7 +4,7 @@ Versions follow the tags of this repository; every push to `main` also
 publishes a nightly build. [`docs/features.md`](docs/features.md) has the
 full, row-by-row status.
 
-## Unreleased
+## 0.48.0 (2026-11-16)
 
 - Saving to CorelDRAW (`.cdr`): curves that fill with the nonzero rule (Fill winding on), such as converted or traced lettering whose parts overlap and text fitted to a path or bent, go out as the outline of the area they fill. CorelDRAW still showed holes where the parts overlapped, although the file marked them Fill winding; they now look the same there in every version, and TraceDraw opens them nonzero again (#2733).
 - Guidelines panel: with a guideline selected, a position typed and Add, the selected guideline stays where it was and one new guideline is added at the typed place. The typed value had already moved the selected one, so Add left two guidelines at the new place (#3068). Modify still moves the selected guideline.
