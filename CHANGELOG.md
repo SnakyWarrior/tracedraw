@@ -13,6 +13,7 @@ full, row-by-row status.
 - Macro editor (Alt+F11): Ctrl+S in the code saves the macro again; since 0.47.0 it opened Save Drawing instead and the code lost the keyboard.
 - Print: Fit to page scales the page to fill the paper inside its margins, larger or smaller, and what is put partly off a page stays cut at its edge, where it was drawn, on facing pages too. It pulled such objects onto the page and shrank the page's other objects with them. Printing the selection, Fit to page still shrinks it to fit the page (#2678).
 - Saving as `.cdr`: a filled curve set to fill with the nonzero rule (Fill winding), such as converted lettering, keeps its smooth and symmetrical nodes when none of its parts overlap; since 0.48.0 every such curve came back with all its nodes cusps.
+- Files dragged onto the window on Windows: a file dropped once was imported again every time the window was minimized and brought back, until TraceDraw was restarted. The input kept while the window was minimized listed the dragged files again at every frame, and the copies counted as a new drag (#3058).
 
 ## 0.48.0 (2026-11-16)
 
