@@ -7,6 +7,7 @@ full, row-by-row status.
 ## Unreleased
 
 - Lens docker: Apply with Frozen keeps what the lens shows, as a picture inside the object, and the object keeps that look when moved. It used to drop the lens, and the object went back to its own colour (#3097).
+- Pictures of a page made by a macro (Document.ExportBitmap, Export), by Print as bitmap and by `tracedraw-cli convert` to PNG fill every pixel, as File > Export has since 0.48.0: they still had a light line along the top and right edge when the page was not a whole number of pixels at the resolution (#2866).
 - `.cdr` (version 16 and later): a fountain transparency whose nodes are not stored as greys, or whose nodes the object's style does not list, opens graded instead of solid or evenly see-through (#3095).
 - EPS, PostScript and AI exports leave out the fill of an open curve, as the drawing window and the SVG, PDF and EMF exports do (unless Fill open curves is on): a filled curve left open came out filled in those files, closed by a straight line from its end back to its start.
 - `.cdr`: an object embedded as a wrapped file (Object Packager, such as a `.crv3d` project) has no picture to show; it now keeps its place as a grey box named after the file instead of being dropped (#3083).
