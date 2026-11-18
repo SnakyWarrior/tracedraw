@@ -14,6 +14,7 @@ full, row-by-row status.
 - DXF: open curves no longer come out filled, and layers set not to print are left out, as in the other exports.
 - EPS and PostScript: characters with a colour or outline of their own keep it. The whole text came out in the object's colour.
 - SVG export with editable text: the file opened again in TraceDraw gave back its lines on one line, each part in its own style as a separate text and invisible texts of spaces; Hebrew and Arabic were written in the file backwards (in the order the glyphs are drawn), for other programs too. The characters now go in as typed, a line at a time, and such files open as one text with its lines and styles.
+- SVG export: drop shadows go out, beneath their objects as the drawing window shows them, in their colour, opacity, feathering and merge mode. They were left out of SVG files.
 - EMF and WMF export: a clip frame keeps its own fill, beneath its contents as on screen. The frame came out empty round its contents.
 - Exports: the contour steps of a filled open curve keep their fill in SVG, PDF, EMF, EPS and AI, as on screen. They came out empty.
 - Find and Replace: with Match case off, a Turkish "İ" before the text searched cut the text in the wrong place or closed TraceDraw; a word in two looks (half of it bold) was found but not replaced; text inside a group was neither found nor replaced. All three work now.
