@@ -4294,7 +4294,10 @@ impl App {
             .clamp(1, complex_star_max_sharpness(self.complex_points));
         self.rect_corners = t.rect_corners;
         self.corners_together = t.corners_together;
-        self.ellipse_arc = t.ellipse_arc.filter(|a| !is_whole_turn(a));
+        // A ring keeps its whole turn.
+        self.ellipse_arc = t
+            .ellipse_arc
+            .filter(|a| !is_whole_turn(a) || (a.pie && a.inner > 0.0));
         self.spiral_revolutions = t.spiral_revolutions.clamp(1, 100);
         self.spiral_logarithmic = t.spiral_logarithmic;
         self.table_rows = t.table_rows.clamp(1, 1000);
@@ -11812,6 +11815,7 @@ pub const DEFAULT_ELLIPSE_ARC: tracedraw_core::EllipseArc = tracedraw_core::Elli
     start_deg: 0.0,
     end_deg: 270.0,
     pie: true,
+    inner: 0.0,
 };
 
 /// A pie or arc whose ends meet: a whole turn, the plain ellipse with a
@@ -13365,6 +13369,7 @@ mod tests {
             start_deg: 90.0,
             end_deg: 90.0,
             pie: true,
+            inner: 0.0,
         };
         app.ellipse_arc = Some(old);
         let prefs = app.tool_prefs();
@@ -13376,6 +13381,7 @@ mod tests {
                 start_deg: whole.0,
                 end_deg: whole.1,
                 pie: false,
+                inner: 0.0,
             }));
         }
         app.ellipse_arc = Some(DEFAULT_ELLIPSE_ARC);
