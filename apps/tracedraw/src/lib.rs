@@ -217,6 +217,7 @@ mod step_merge;
 mod step_repeat;
 mod storage_full;
 mod straighten;
+mod builtin_looks;
 mod style_presets;
 mod styles;
 mod symbol_paste;
