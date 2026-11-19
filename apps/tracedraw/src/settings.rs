@@ -1863,6 +1863,8 @@ pub struct ToolPrefs {
     pub balloon: BalloonPrefs,
     /// The Action Lines tool's settings.
     pub action_lines: crate::action_lines::ActionLines,
+    /// The Shape Generator panel's settings (#3412).
+    pub shape_gen: crate::shape_gen::ShapeGenSettings,
     /// The Painterly Brush tool's brush and size.
     pub painterly: crate::painterly_tool::PainterlySettings,
 }
@@ -1980,6 +1982,7 @@ impl Default for ToolPrefs {
             media: Default::default(),
             balloon: Default::default(),
             action_lines: Default::default(),
+            shape_gen: Default::default(),
             painterly: Default::default(),
         }
     }
