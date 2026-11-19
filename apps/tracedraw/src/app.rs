@@ -2282,6 +2282,8 @@ pub struct App {
     pub vector_mosaic: crate::vector_mosaic::VectorMosaicSettings,
     /// The Symbol Scatter docker's settings (and picked symbols).
     pub symbol_scatter: crate::symbol_scatter::ScatterSettings,
+    /// The Frame Generator docker's settings.
+    pub frame_gen: crate::frame_gen::FrameSettings,
     /// The Picture Mosaic docker's settings and indexed library.
     pub picture_mosaic: crate::picture_mosaic::PictureMosaicSettings,
     /// A Picture Mosaic library being indexed in the background.
@@ -2479,6 +2481,7 @@ pub enum DockerTab {
     PictureMosaic,
     ShapeGenerator,
     SymbolScatter,
+    FrameGenerator,
     Shelf,
     Export,
     Comments,
@@ -2489,7 +2492,7 @@ pub enum DockerTab {
 }
 
 impl DockerTab {
-    pub const ALL: [DockerTab; 46] = [
+    pub const ALL: [DockerTab; 47] = [
         DockerTab::Properties,
         DockerTab::Objects,
         DockerTab::Hints,
@@ -2532,6 +2535,7 @@ impl DockerTab {
         DockerTab::PictureMosaic,
         DockerTab::ShapeGenerator,
         DockerTab::SymbolScatter,
+        DockerTab::FrameGenerator,
         DockerTab::Shelf,
         DockerTab::Effects,
         DockerTab::Macros,
@@ -2589,7 +2593,7 @@ impl DockerTab {
     ];
 
     /// Window > Panels > Effects.
-    pub const EFFECTS_MENU: [DockerTab; 12] = [
+    pub const EFFECTS_MENU: [DockerTab; 13] = [
         DockerTab::Effects,
         DockerTab::Blend,
         DockerTab::Contour,
@@ -2602,6 +2606,7 @@ impl DockerTab {
         DockerTab::VectorMosaic,
         DockerTab::PictureMosaic,
         DockerTab::SymbolScatter,
+        DockerTab::FrameGenerator,
     ];
 
     /// i18n key of the docker's title.
@@ -2646,6 +2651,7 @@ impl DockerTab {
             DockerTab::PictureMosaic => "docker.picture_mosaic",
             DockerTab::ShapeGenerator => "docker.shape_generator",
             DockerTab::SymbolScatter => "docker.symbol_scatter",
+            DockerTab::FrameGenerator => "docker.frame_generator",
             DockerTab::Shelf => "docker.shelf",
             DockerTab::Export => "docker.export",
             DockerTab::Comments => "docker.comments",
@@ -3582,6 +3588,7 @@ impl App {
             coords: Default::default(),
             vector_mosaic: Default::default(),
             symbol_scatter: Default::default(),
+            frame_gen: Default::default(),
             picture_mosaic: Default::default(),
             picture_mosaic_job: None,
             coord_pick: None,
