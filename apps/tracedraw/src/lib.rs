@@ -91,6 +91,7 @@ mod file_presence;
 mod files;
 mod fill_page;
 mod shape_gen;
+mod shape_gen_cells;
 mod fill_tool;
 mod pattern_fill_tool;
 mod fit_path;
