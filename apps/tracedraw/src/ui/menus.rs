@@ -2921,6 +2921,9 @@ fn file_menu(app: &mut App, ui: &mut Ui) {
     if item(ui, "menu.file.document_properties", "", doc) {
         app.dialog = Dialog::DocumentProperties(Box::default());
     }
+    if item(ui, "menu.edit.copy_visible_area", "", app.drawing_shown()) {
+        app.copy_visible_area();
+    }
     sep(ui);
     if item(ui, "menu.file.exit", "Alt+F4", true) {
         app.request_exit();
