@@ -373,7 +373,7 @@ pub fn render_page_progressive(
         let count = (cores * PROGRESS_BANDS_PER_CORE).min(h / 64).max(cores);
         progressive_band_layout(h, count, blur_margin(blur_mm, opts.view.zoom), first)
     };
-    let Some(bands) = bands.filter(|b| b.len() > 1) else {
+    let Some(mut bands) = bands.filter(|b| b.len() > 1) else {
         return render_page_cancellable(doc, page, opts, cancel);
     };
     let middle = |b: &(u32, u32, u32, u32)| (b.0 + b.1) / 2;
