@@ -6719,6 +6719,9 @@ impl App {
                         });
                     }
                     self.select(vec![id]);
+                    if joined != Some(id) {
+                        self.add_parallel_lines(id);
+                    }
                 }
             }
             _ => {}
@@ -6799,6 +6802,7 @@ impl App {
                 },
             ) {
                 self.select(vec![id]);
+                self.add_parallel_lines(id);
             }
             return;
         }
