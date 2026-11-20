@@ -24,6 +24,9 @@ pub struct PendingPaste {
     at: Option<Point>,
     center: Point,
     mark: Option<Mark>,
+    /// Paste Above Selection: the object the paste goes just in front
+    /// of once it arrives.
+    above: Option<ShapeId>,
 }
 
 #[cfg_attr(any(target_arch = "wasm32", target_os = "android"), allow(dead_code))]
@@ -1131,6 +1134,20 @@ impl App {
         let Some(reference) = reference else {
             return;
         };
+        // A paste read from the system clipboard arrives later, from the
+        // worker: it is laid in front when it comes (`poll_clipboard_paste`).
+        if self.selection == before {
+            if let Some(pending) = self.clipboard_paste.as_mut() {
+                pending.above = Some(reference);
+                return;
+            }
+        }
+        self.place_pasted_above(&before, reference);
+    }
+
+    /// Lay what was just pasted (the selection, unless it is still
+    /// `before`) just in front of `reference`, within the paste's Undo.
+    fn place_pasted_above(&mut self, before: &[ShapeId], reference: ShapeId) {
         if self.selection.is_empty() || self.selection == before {
             return;
         }
@@ -1334,6 +1351,7 @@ impl App {
             at,
             center: at.unwrap_or_else(|| self.page_rect().center()),
             mark: self.clipboard.as_ref().map(|cb| cb.system),
+            above: None,
         };
         match std::thread::Builder::new()
             .name("clipboard-paste".into())
@@ -1380,6 +1398,7 @@ impl App {
         {
             return false;
         }
+        let (selected, above) = (self.selection.clone(), pending.above);
         let Some(layer) = pending.layer else {
             return false;
         };
@@ -1430,6 +1449,9 @@ impl App {
                     self.move_pasted_to(&before, pending.at);
                 }
             }
+        }
+        if let Some(reference) = above {
+            self.place_pasted_above(&selected, reference);
         }
         false
     }
@@ -2393,6 +2415,16 @@ mod tests {
         assert!((b.center() - c).hypot() < 1e-6, "{:?} at {c:?}", b.center());
     }
 
+    /// Let a paste on the clipboard worker arrive (the tests have no
+    /// system clipboard, so it ends as the copy made here).
+    fn finish_paste(app: &mut App) {
+        let deadline = std::time::Instant::now() + std::time::Duration::from_secs(10);
+        while app.poll_clipboard_paste() {
+            assert!(std::time::Instant::now() < deadline, "the paste never arrived");
+            std::thread::sleep(std::time::Duration::from_millis(1));
+        }
+    }
+
     /// Paste Above Selection lays the copy just in front of the topmost
     /// selected object, not at the top of the layer, in one Undo step
     /// (#3673).
@@ -2418,6 +2450,7 @@ mod tests {
         app.select(vec![b, a]);
         let steps = app.engine.history_labels().0.len();
         app.paste_above_selection();
+        finish_paste(&mut app);
         let pasted = app.selection.clone();
         assert_eq!(pasted.len(), 1);
         assert!(pasted[0] != c);
@@ -2433,6 +2466,7 @@ mod tests {
         // With nothing selected it pastes as Paste does: on top.
         app.select(vec![]);
         app.paste_above_selection();
+        finish_paste(&mut app);
         let top = app.selection[0];
         let order: Vec<ShapeId> = app
             .doc()
@@ -2696,6 +2730,7 @@ mod tests {
             at,
             center: at.unwrap_or_else(|| app.page_rect().center()),
             mark: app.clipboard.as_ref().map(|cb| cb.system),
+            above: None,
         });
         send
     }
