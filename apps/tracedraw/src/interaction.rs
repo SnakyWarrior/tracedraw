@@ -1923,6 +1923,11 @@ impl App {
             }
             return;
         }
+        // The Symbol Scatter panel's brush, while ticked, takes drags
+        // over the selected group.
+        if !self.transforming() && self.symbol_brush_input(response, p, mods) {
+            return;
+        }
         // File > Import's file waiting for a click, a drag or Space to
         // place it (#1936).
         if self.import_placement_input(response, p) {
@@ -3625,11 +3630,13 @@ impl App {
         if response.drag_started_by(PointerButton::Primary)
             || response.clicked_by(PointerButton::Primary)
         {
+            let through = bspline && self.settings.curves.spline_through;
             let c = self.curve.get_or_insert_with(|| CurveInProgress {
                 nodes: Vec::new(),
                 smooth,
                 dragging_handle: false,
                 bspline,
+                through,
                 ..Default::default()
             });
             c.smooth = smooth;
