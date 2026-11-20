@@ -3191,6 +3191,23 @@ fn view_menu(app: &mut App, ui: &mut Ui) {
         app.simulate_overprints = !app.simulate_overprints;
         app.raster.borrow_mut().invalidate();
     }
+    // One ink at a time in the drawing window, in its colour.
+    sub(ui, "menu.view.separations", |ui| {
+        if radio(
+            ui,
+            "menu.view.separations_composite",
+            "",
+            app.view_plate.is_none(),
+        ) {
+            app.set_view_plate(None);
+        }
+        for (i, name) in app.separation_names().into_iter().enumerate() {
+            let id = format!("menu.view.separations.{i}");
+            if check_label(ui, &name, &id, app.view_plate == Some(i)) {
+                app.set_view_plate(Some(i));
+            }
+        }
+    });
     if check(
         ui,
         "menu.view.rasterize_complex_effects",
@@ -3464,6 +3481,12 @@ fn node_items(app: &mut App, ui: &mut Ui) {
             app.run_node_command(key);
         }
     }
+    // With any tool, on the whole of each selected curve.
+    sep(ui);
+    let every = app.can_add_node_every_segment();
+    if item(ui, "menu.object.node_add_every", "", every) {
+        app.add_node_every_segment();
+    }
 }
 
 fn object_menu(app: &mut App, ui: &mut Ui) {
@@ -3546,6 +3569,9 @@ fn object_menu(app: &mut App, ui: &mut Ui) {
         // A formula; with one selected, the same item edits it (#2183).
         if item(ui, "menu.object.insert_formula", "", true) {
             app.open_formula_dialog();
+        }
+        if item(ui, "menu.object.insert_flare", "", true) {
+            app.open_flare_dialog();
         }
         if item(ui, "menu.object.insert_qr", "", true) {
             app.insert_qr_code();
@@ -3792,6 +3818,10 @@ fn object_menu(app: &mut App, ui: &mut Ui) {
         if item(ui, "menu.object.rotate_by_lines", "", has) {
             app.start_rotate_by_lines();
         }
+        // Each object by the same (or random) amounts about its own centre.
+        if item(ui, "menu.object.transform_each", "", has) {
+            app.open_transform_each();
+        }
     });
     if item(ui, "menu.object.clear_transformations", "", has) {
         app.clear_transformations();
@@ -3839,6 +3869,14 @@ fn object_menu(app: &mut App, ui: &mut Ui) {
         app.can_clear_transparency(),
     ) {
         app.clear_transparency();
+    }
+    if item(
+        ui,
+        "menu.object.flatten_transparency",
+        "",
+        app.can_clear_transparency(),
+    ) {
+        app.flatten_transparency();
     }
     sep(ui);
     sub(ui, "menu.object.align_distribute", |ui| {
