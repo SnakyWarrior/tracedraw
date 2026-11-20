@@ -8,6 +8,7 @@ full, row-by-row status.
 
 - Layer effects: a live Halftone effect turns an object, with its other effects, into round, square, diamond or line dots in RGB light, CMYK ink or one colour; the inner shadow gains Spread, which keeps the shadow solid over part of its blur before it fades.
 - Trace dialog: with AI turned on and a service that makes pictures, Clean up a pencil sketch shows a words field and Clean up with AI, which has the service redraw the sketch and traces the result into curves; hidden while AI is off.
+- Pick tool, rotate mode (second click): holding Shift while turning by a corner handle or a node also scales the selection, keeping its proportions, by how far the pointer is from the centre of rotation (#3772).
 - The interface comes in Vietnamese (Tiếng Việt): Options > Global, the Windows installer and the system language offer it, with a system font found for its letters (#3692).
 - Envelope: mesh envelope (Envelope panel, Columns and Rows, Add Mesh; drag the grid points with the Envelope tool) and Object > Copy Effect > Envelope from Top Object.
 - Object > Combine Shapes: Break into Pieces, Merge Same Colors, Cut to Top Object, Piece Outlines, Exclude Overlaps, and Combine Live (a group drawn as one combined curve, objects kept). The live outline offset is now named Grow Outline.
