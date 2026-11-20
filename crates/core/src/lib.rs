@@ -38,6 +38,7 @@ pub mod painterly;
 pub mod paragraphs;
 pub mod parallel;
 pub mod patch;
+pub mod pattern_stroke;
 pub mod picture_inks;
 mod press;
 pub mod procedural;
