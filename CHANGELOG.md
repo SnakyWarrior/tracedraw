@@ -14,6 +14,7 @@ full, row-by-row status.
 - Freehand: a new option in Options > Tools > Freehand/Bézier, "Second click ends the line", draws one straight segment with two clicks and stops, instead of going on from the second click (#3848).
 - Show Full Preview: the mirrored copies of a symmetry group show at once at every zoom, instead of partly missing until a zoom out (#3821).
 
+- Object menu: Fill With Copies... lays the smaller of two selected objects in a grid over every place inside the larger one where a whole copy fits, with the gaps typed, and says how many fit (#3834).
 ## 0.51.0 (2026-11-22)
 
 - .cdr import: a TraceDraw drawing embedded in a .cdr file as a packaged file comes in as its own objects, editable and at their real size, centred where the embedded object stands, instead of a grey box (#3600).
