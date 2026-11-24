@@ -1227,7 +1227,9 @@ fn balloon_bar(app: &mut App, ui: &mut Ui) {
 
 /// The Shape Builder's bar (#3220): Add or Delete, what a drag or a click
 /// does with the parts (Alt does the other); Keep Originals, a merge
-/// leaving the objects it came from as they were; Accept, the shapes
+/// leaving the objects it came from as they were; Use Guidelines; Remove
+/// Leftovers, Accept deleting what is left of the objects the merges
+/// used (#4123); Accept, the shapes
 /// built kept and back to the Pick tool; Cancel, the tool's steps since
 /// it was chosen undone.
 fn shape_builder_bar(app: &mut App, ui: &mut Ui) {
@@ -1251,6 +1253,10 @@ fn shape_builder_bar(app: &mut App, ui: &mut Ui) {
     // The guidelines cut the objects too (#3558), off by default.
     ui.checkbox(&mut app.builder.use_guides, tr("toolbar.builder_guides"))
         .rich_tip(crate::ui::tips::keyed("toolbar.builder_guides"));
+    // Accept deletes what is left of the objects the merges used (#4123),
+    // off by default.
+    ui.checkbox(&mut app.builder.remove_leftovers, tr("toolbar.builder_leftovers"))
+        .rich_tip(crate::ui::tips::keyed("toolbar.builder_leftovers"));
     vsep(ui);
     let made = app.builder.session_steps > 0;
     if ui
