@@ -6743,7 +6743,7 @@ impl App {
             // Cancel undoes only what the Shape Builder made since it was
             // chosen (#3220).
             if tool == Tool::ShapeBuilder {
-                self.builder.session_steps = 0;
+                self.builder_forget_session();
             }
             // Another tool ends a pick of Image > Color Mask (#2479).
             if tool != Tool::ColorEyedropper {
