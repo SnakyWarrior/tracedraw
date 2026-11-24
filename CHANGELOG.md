@@ -6,6 +6,7 @@ full, row-by-row status.
 
 ## Unreleased
 
+- The interface comes in Esperanto: Options > Global and the Windows installer offer it, and a system whose display languages list Esperanto starts in it. Translation by the contributor of #3536; the strings added since are machine translations marked for review (#3536).
 - `.cdr` objects that paragraph text wraps round keep the text away when the file opens, at the distance the file gives, where the text ran under them (#4142).
 - Object > Clip to Frame > No Frame: the right-click menu's Frame Type > No Frame is also a command of the Object menu, so it can take a shortcut in Options > Customization > Commands (#4132).
 - Object > Align and Distribute > Center to Page Horizontally and Center to Page Vertically move the selected objects only across or only down to the page's centre line; they can take a shortcut in Options > Customization > Commands (#3752).

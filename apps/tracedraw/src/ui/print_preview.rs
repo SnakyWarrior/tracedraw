@@ -3096,7 +3096,7 @@ mod tests {
         let size = crate::splash::DEFAULT_SIZE;
         for code in [
             "en", "es", "pt-BR", "fr", "de", "it", "nl", "pl", "cs", "ru", "tr", "id", "ar", "hi",
-            "bn", "ja", "zh-CN", "zh-TW", "lo", "vi",
+            "bn", "ja", "zh-CN", "zh-TW", "lo", "vi", "eo",
         ] {
             crate::i18n::with_thread_language(code, || {
                 let ctx = crate::theme::ui_context();
