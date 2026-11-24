@@ -12515,4 +12515,16 @@ grid.link_colors_tip = "細分線使用格線的顏色，並有自己的不透�
 grid.reset_colors = "重設顏色" # mt
 grid.reset_colors_tip = "恢復為常用的灰色線和較淡的細分線。" # mt
 options.open_grid_panel = "開啟格線面板" # mt
-options.open_grid_panel_tip = "更多格線設定：模式、預設集、細分、欄間距、傾斜格線、顏色和畫布上的軸控制項。" # mt
+options.open_grid_panel_tip = "更多格線設定：模式、預設集、細分、欄間距、傾斜格線、顏色和畫布上的軸控制項。" # mtstatus.mockup_select_photo = "請把一張圖片與設計一起選取：它會成為照片。" # mteffects.drag_to_object = "將名稱拖曳到頁面上的另一個物件上，即可為其加上此效果的副本。" # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en

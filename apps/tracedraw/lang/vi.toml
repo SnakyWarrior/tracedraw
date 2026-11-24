@@ -12510,4 +12510,16 @@ grid.link_colors_tip = "Vạch chia lấy màu của đường lưới, với đ
 grid.reset_colors = "Đặt lại màu" # mt
 grid.reset_colors_tip = "Trở về đường xám thường ngày và vạch chia nhạt hơn." # mt
 options.open_grid_panel = "Mở bảng Lưới" # mt
-options.open_grid_panel_tip = "Thêm thiết lập lưới: chế độ, thiết lập sẵn, vạch chia, rãnh, lưới nghiêng, màu và điều khiển trục trên khung vẽ." # mt
+options.open_grid_panel_tip = "Thêm thiết lập lưới: chế độ, thiết lập sẵn, vạch chia, rãnh, lưới nghiêng, màu và điều khiển trục trên khung vẽ." # mtstatus.mockup_select_photo = "Chọn một hình cùng với thiết kế: hình đó sẽ là ảnh nền." # mteffects.drag_to_object = "Kéo tên lên một đối tượng khác trên trang để gán cho nó một bản sao của hiệu ứng này." # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en

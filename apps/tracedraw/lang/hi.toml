@@ -12515,4 +12515,16 @@ grid.link_colors_tip = "उपविभाजन रेखाएँ ग्रि
 grid.reset_colors = "रंग रीसेट करें" # mt
 grid.reset_colors_tip = "सामान्य धूसर रेखाओं और हल्के उपविभाजनों पर वापस।" # mt
 options.open_grid_panel = "ग्रिड पैनल खोलें" # mt
-options.open_grid_panel_tip = "ग्रिड की और सेटिंग: मोड, प्रीसेट, उपविभाजन, गटर, तिरछे ग्रिड, रंग और कैनवास पर अक्ष नियंत्रण।" # mt
+options.open_grid_panel_tip = "ग्रिड की और सेटिंग: मोड, प्रीसेट, उपविभाजन, गटर, तिरछे ग्रिड, रंग और कैनवास पर अक्ष नियंत्रण।" # mtstatus.mockup_select_photo = "डिज़ाइन के साथ एक तस्वीर चुनें: वही फ़ोटो बनेगी।" # mteffects.drag_to_object = "इस इफ़ेक्ट की एक कॉपी देने के लिए नाम को पेज पर किसी दूसरे ऑब्जेक्ट पर खींचें।" # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en

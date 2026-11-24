@@ -12515,4 +12515,16 @@ grid.link_colors_tip = "تأخذ خطوط التقسيم لون خطوط الش�
 grid.reset_colors = "إعادة تعيين الألوان" # mt
 grid.reset_colors_tip = "العودة إلى الخطوط الرمادية المعتادة والتقسيمات الأبهت." # mt
 options.open_grid_panel = "فتح لوحة الشبكة" # mt
-options.open_grid_panel_tip = "مزيد من إعدادات الشبكة: الأوضاع والإعدادات المسبقة والتقسيمات والفواصل والشبكات المائلة والألوان وعناصر التحكم بالمحاور في اللوحة." # mt
+options.open_grid_panel_tip = "مزيد من إعدادات الشبكة: الأوضاع والإعدادات المسبقة والتقسيمات والفواصل والشبكات المائلة والألوان وعناصر التحكم بالمحاور في اللوحة." # mtstatus.mockup_select_photo = "حدّد صورة مع التصميم: ستصبح هي الصورة الأساسية." # mteffects.drag_to_object = "اسحب الاسم إلى كائن آخر في الصفحة لمنحه نسخة من هذا التأثير." # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en

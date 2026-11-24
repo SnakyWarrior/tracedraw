@@ -12515,4 +12515,16 @@ grid.link_colors_tip = "Onderverdelingslijnen nemen de kleur van de rasterlijnen
 grid.reset_colors = "Kleuren herstellen" # mt
 grid.reset_colors_tip = "Terug naar de gewone grijze lijnen en vagere onderverdelingen." # mt
 options.open_grid_panel = "Het paneel Raster openen" # mt
-options.open_grid_panel_tip = "Meer rasterinstellingen: modi, voorinstellingen, onderverdelingen, tussenruimtes, schuine rasters, kleuren en assenbediening op het canvas." # mt
+options.open_grid_panel_tip = "Meer rasterinstellingen: modi, voorinstellingen, onderverdelingen, tussenruimtes, schuine rasters, kleuren en assenbediening op het canvas." # mtstatus.mockup_select_photo = "Selecteer een afbeelding samen met het ontwerp: die wordt de foto." # mteffects.drag_to_object = "Sleep de naam op een ander object op de pagina om het een kopie van dit effect te geven." # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en

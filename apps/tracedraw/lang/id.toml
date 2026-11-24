@@ -12515,4 +12515,16 @@ grid.link_colors_tip = "Garis subdivisi memakai warna garis kisi-kisi, dengan op
 grid.reset_colors = "Atur ulang warna" # mt
 grid.reset_colors_tip = "Kembali ke garis abu-abu biasa dan subdivisi yang lebih pudar." # mt
 options.open_grid_panel = "Buka panel Kisi-kisi" # mt
-options.open_grid_panel_tip = "Pengaturan kisi-kisi lain: mode, prasetel, subdivisi, selokan, kisi-kisi miring, warna, dan kontrol sumbu di kanvas." # mt
+options.open_grid_panel_tip = "Pengaturan kisi-kisi lain: mode, prasetel, subdivisi, selokan, kisi-kisi miring, warna, dan kontrol sumbu di kanvas." # mtstatus.mockup_select_photo = "Pilih sebuah gambar bersama desain: gambar itu menjadi fotonya." # mteffects.drag_to_object = "Seret nama ke objek lain di halaman untuk memberinya salinan efek ini." # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en

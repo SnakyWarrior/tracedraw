@@ -12515,4 +12515,16 @@ grid.link_colors_tip = "分割線はグリッド線の色を使い、不透明�
 grid.reset_colors = "色をリセット" # mt
 grid.reset_colors_tip = "いつもの灰色の線と薄い分割線に戻します。" # mt
 options.open_grid_panel = "グリッドパネルを開く" # mt
-options.open_grid_panel_tip = "その他のグリッド設定: モード、プリセット、分割線、段間、斜めのグリッド、色、キャンバス上の軸コントロール。" # mt
+options.open_grid_panel_tip = "その他のグリッド設定: モード、プリセット、分割線、段間、斜めのグリッド、色、キャンバス上の軸コントロール。" # mtstatus.mockup_select_photo = "デザインと一緒に画像を選択してください。その画像が写真になります。" # mteffects.drag_to_object = "名前をページ上の別のオブジェクトにドラッグすると、この効果のコピーが適用されます。" # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en

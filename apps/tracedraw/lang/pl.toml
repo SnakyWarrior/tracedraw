@@ -12515,4 +12515,16 @@ grid.link_colors_tip = "Linie podziału przyjmują kolor linii siatki, z własny
 grid.reset_colors = "Resetuj kolory" # mt
 grid.reset_colors_tip = "Powrót do zwykłych szarych linii i jaśniejszych podziałów." # mt
 options.open_grid_panel = "Otwórz panel Siatka" # mt
-options.open_grid_panel_tip = "Więcej ustawień siatki: tryby, ustawienia, podziały, marginesy, siatki ukośne, kolory i sterowanie osiami na płótnie." # mt
+options.open_grid_panel_tip = "Więcej ustawień siatki: tryby, ustawienia, podziały, marginesy, siatki ukośne, kolory i sterowanie osiami na płótnie." # mtstatus.mockup_select_photo = "Zaznacz obraz razem z projektem: stanie się zdjęciem." # mteffects.drag_to_object = "Przeciągnij nazwę na inny obiekt na stronie, aby nadać mu kopię tego efektu." # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en

@@ -12515,4 +12515,16 @@ grid.link_colors_tip = "Le linee di suddivisione prendono il colore delle linee 
 grid.reset_colors = "Ripristina colori" # mt
 grid.reset_colors_tip = "Torna alle solite linee grigie e alle suddivisioni più tenui." # mt
 options.open_grid_panel = "Apri il pannello Griglia" # mt
-options.open_grid_panel_tip = "Altre impostazioni della griglia: modalità, preimpostazioni, suddivisioni, canaline, griglie inclinate, colori e controlli degli assi sulla tela." # mt
+options.open_grid_panel_tip = "Altre impostazioni della griglia: modalità, preimpostazioni, suddivisioni, canaline, griglie inclinate, colori e controlli degli assi sulla tela." # mtstatus.mockup_select_photo = "Seleziona un'immagine insieme alla grafica: diventa la foto." # mteffects.drag_to_object = "Trascinare il nome su un altro oggetto della pagina per dargli una copia di questo effetto." # mt
+menu.window.plugins = "Plugins" # en
+menu.window.plugins_manage = "Manage Plugins..." # en
+menu.window.plugins_import = "Import Plugin..." # en
+dialog.native_plugins = "Plugin Manager" # en
+dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
+dialog.native_plugins_none = "No plugins are installed yet." # en
+status.native_plugin_no_manifest = "the zip has no plugin.toml" # en
+status.native_plugin_invalid = "plugin.toml needs name and launch" # en
+status.native_plugin_installed = "Plugin installed: {name} (Window > Plugins)" # en
+status.native_plugin_opened = "Opening {name}..." # en
+status.native_plugin_launch_failed = "Could not open {name}: {e}" # en
+status.native_plugin_windows_only = "Plugins need Windows" # en
