@@ -1067,7 +1067,7 @@ pub struct Settings {
     pub plugins: Vec<crate::scripting::Plugin>,
     /// Window > Plugins (fork-only, see `behavior/native-plugins.md`).
     #[cfg(not(target_arch = "wasm32"))]
-    #[serde(default)]
+    #[serde(default = "crate::native_plugins::defaults")]
     pub native_plugins: Vec<crate::native_plugins::NativePlugin>,
     /// The plugin last opened, docked when TraceDraw starts again (same
     /// idea as a docker staying open across restarts): `None` once the
@@ -2938,7 +2938,7 @@ impl Default for Settings {
             script_filters: Vec::new(),
             plugins: Vec::new(),
             #[cfg(not(target_arch = "wasm32"))]
-            native_plugins: Vec::new(),
+            native_plugins: crate::native_plugins::defaults(),
             #[cfg(not(target_arch = "wasm32"))]
             docked_native_plugin: None,
             window_buttons: false,

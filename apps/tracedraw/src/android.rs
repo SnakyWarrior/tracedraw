@@ -610,6 +610,22 @@ pub mod outside {
         .unwrap_or(false)
     }
 
+    /// Open `uri` (a native plugin's link, fork-only) in the app that takes it. False when no
+    /// app opens it.
+    pub fn launch_plugin(uri: &str) -> bool {
+        with_activity("launch_plugin", |env, activity| {
+            let uri = env.new_string(uri)?;
+            env.call_method(
+                activity,
+                jni_str!("launchPlugin"),
+                jni_sig!("(Ljava/lang/String;)Z"),
+                &[JValue::Object(&uri)],
+            )?
+            .z()
+        })
+        .unwrap_or(false)
+    }
+
     /// Show `target`, a web address or one of the app's files, in the app
     /// the system has for it (`mime` for a file, empty for an address).
     /// False when no app opens it.

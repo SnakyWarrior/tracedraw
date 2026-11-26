@@ -57,6 +57,27 @@ at that point, only a frame that never ran). A plugin still only
 launching (no panel open yet, `App::native_plugin_panel_was_open` not
 set) is never mistaken for one that was closed.
 
+## Android
+
+Android docks no window of another app, so TraceDraw only opens the
+plugin's `launch` with its port and token (`android::outside::launch_plugin`,
+the activity's `launchPlugin`: `ACTION_VIEW`, `FLAG_ACTIVITY_NEW_TASK`), and
+the plugin shows its own panel over TraceDraw (FDQ Nest: a window at the
+side, drawn over other apps). TraceDraw stays in front and running: an app
+out of sight may be frozen by the system, and the plugin's calls to the
+agents' link would wait (split screen keeps both running too, but only
+halves the screen). The plugin tells TraceDraw how wide its panel is with the
+agents' link tool `side_panel` (`width_px`, physical pixels, 0 when it
+goes), and the interface keeps clear of it as of a docker: it is added to
+the safe area's right side (`screen_margins::set_side_panel`, at most four
+fifths of the window, back to 0 at every start). The agents' link
+(MCP) is offered on Android in this fork (`DesktopOnly::Agents`), since the
+plugin on the same phone is what it serves. No "Opening..." docker is
+shown and nothing opens again by itself at the next start (it would open
+the other app each time). A fresh install lists FDQ Nest
+(`native_plugins::defaults`): no installer can write TraceDraw's settings
+there, they are in its private folder.
+
 ## Not done
 
 - One plugin docked at a time (the external panel's own limit).
@@ -64,4 +85,4 @@ set) is never mistaken for one that was closed.
   plugin here only closes its panel (`undock_window`); the program
   itself, and whatever it is doing, is its own.
 - No icon, description or version in the manifest.
-- Windows only, like the external panel it opens.
+- Docking is Windows only, like the external panel it opens; Android opens the plugin's app beside TraceDraw.

@@ -137,6 +137,12 @@ pub fn tool_list() -> Vec<Value> {
             &["hwnd", "title"],
         ),
         tool("undock_window", "Close the docked external panel.", json!({}), &[]),
+        tool(
+            "side_panel",
+            "Android (fork-only): another app's panel stands over TraceDraw's right edge, width_px physical pixels wide; the interface keeps clear of it. 0 when it goes.",
+            json!({"width_px": {"type": "integer"}}),
+            &["width_px"],
+        ),
     ]
 }
 
@@ -269,6 +275,14 @@ pub fn call_tool(app: &mut App, name: &str, args: &Value) -> Result<String, Stri
             crate::external_panel::dock(app, hwnd, str_arg(args, "title")?)
         }
         "undock_window" => Ok(crate::external_panel::undock(app)),
+        "side_panel" => {
+            let px = args
+                .get("width_px")
+                .and_then(|v| v.as_u64())
+                .ok_or("missing argument: width_px")?;
+            crate::ui::screen_margins::set_side_panel(px.min(100_000) as u32);
+            Ok("ok".to_string())
+        }
         other => Err(format!("unknown tool: {other}")),
     }
 }

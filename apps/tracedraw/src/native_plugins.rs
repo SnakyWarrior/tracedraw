@@ -26,6 +26,16 @@ pub struct NativePlugin {
     pub launch: String,
 }
 
+/// The plugins a fresh install starts with: on Android FDQ Nest, which no installer can add
+/// there (TraceDraw's settings are in its private folder); none elsewhere.
+pub fn defaults() -> Vec<NativePlugin> {
+    if cfg!(target_os = "android") {
+        vec![NativePlugin { name: "FDQ Nest".into(), launch: "fdq-nest://panel/".into() }]
+    } else {
+        Vec::new()
+    }
+}
+
 /// `plugin.toml` inside the zip at `path`.
 fn read_manifest(path: &std::path::Path) -> Result<NativePlugin, String> {
     let file = std::fs::File::open(path).map_err(|e| e.to_string())?;
@@ -140,6 +150,8 @@ impl App {
             self.settings.docked_native_plugin = Some(name.to_string());
             self.settings.save();
         }
+        // Android docks no window: the plugin's app shows its own panel instead
+        #[cfg(not(target_os = "android"))]
         crate::external_panel::opening(self, name);
         self.pending_native_plugin = Some(p);
     }
@@ -152,6 +164,7 @@ impl App {
     pub fn poll_native_plugin_launch(&mut self) {
         if !self.native_plugin_restored {
             self.native_plugin_restored = true;
+            #[cfg(not(target_os = "android"))]
             if let Some(name) = self.settings.docked_native_plugin.clone() {
                 self.open_native_plugin(&name);
             }
@@ -188,7 +201,18 @@ impl App {
                 );
             }
         }
-        #[cfg(not(windows))]
+        // The plugin's app shows its own panel over TraceDraw (FDQ Nest: a window at the side), so
+        // TraceDraw stays in front and running, its link with it.
+        #[cfg(target_os = "android")]
+        if crate::android::outside::launch_plugin(&uri) {
+            self.status = trf("status.native_plugin_opened", &[("name", &p.name)]);
+        } else {
+            self.status = trf(
+                "status.native_plugin_launch_failed",
+                &[("name", &p.name), ("e", "no app opens it")],
+            );
+        }
+        #[cfg(not(any(windows, target_os = "android")))]
         {
             self.status = tr("status.native_plugin_windows_only");
         }

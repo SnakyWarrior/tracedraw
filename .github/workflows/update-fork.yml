@@ -55,7 +55,7 @@ jobs:
           git rebase external-panel
 
       - name: Build
-        run: cargo build --release -p tracedraw --bin tracedraw
+        run: cargo build --release -p tracedraw -p tracedraw-cli -p tracedraw-thumbnailer
 
       - name: Test
         run: cargo test --release -p tracedraw --lib -- i18n menus dialogs help plugins native_plugin external_panel settings
@@ -65,9 +65,18 @@ jobs:
           git push --force-with-lease origin external-panel
           git push --force-with-lease origin native-plugins
 
-      - name: Package the release asset
+      # tracedraw-plugins.zip (only tracedraw.exe) is what FDQ Nest's installer and its daily check download: keep its name.
+      # Beside it the same packages upstream releases: the installer and the portable zip (packaging/windows).
+      - name: Package the release assets
         shell: pwsh
-        run: Compress-Archive -Path target/release/tracedraw.exe -DestinationPath tracedraw-plugins.zip -Force
+        run: |
+          Compress-Archive -Path target/release/tracedraw.exe -DestinationPath tracedraw-plugins.zip -Force
+          $version = (Select-String -Path Cargo.toml -Pattern '^version = "(.*)"' | Select-Object -First 1).Matches.Groups[1].Value
+          if (-not (Test-Path "C:\Program Files (x86)\Inno Setup 6\ISCC.exe")) { choco install innosetup -y --no-progress }
+          New-Item -ItemType Directory -Force dist | Out-Null
+          & "C:/Program Files (x86)/Inno Setup 6/ISCC.exe" /DVersion=$version /DArch=x86_64 /DSrcDir="$PWD/target/release" packaging/windows/tracedraw.iss
+          Copy-Item -Recurse -Force packaging/windows/portable/tracedraw-settings target/release/tracedraw-settings
+          Compress-Archive -Path target/release/tracedraw.exe,target/release/tracedraw-cli.exe,target/release/tracedraw-settings,README.md,LICENSE-MIT,LICENSE-APACHE -DestinationPath "dist/tracedraw-$version-plugins-windows-x86_64-portable.zip" -Force
 
       - name: Move the release tag and publish
         env:
@@ -76,5 +85,36 @@ jobs:
           git tag -f native-plugins-latest native-plugins
           git push -f origin native-plugins-latest
           gh release delete native-plugins-latest --repo ${{ github.repository }} --yes || echo "no previous release"
-          gh release create native-plugins-latest tracedraw-plugins.zip --repo ${{ github.repository }} --prerelease --title "TraceDraw + external panel + native plugins (latest)" --notes "Automatically rebuilt on $(Get-Date -Format yyyy-MM-dd) from upstream $(git rev-parse --short upstream/main). One file inside: tracedraw.exe, no installer. Unsigned."
+          gh release create native-plugins-latest tracedraw-plugins.zip (Get-ChildItem dist\*.exe,dist\*.zip).FullName --repo ${{ github.repository }} --prerelease --title "TraceDraw + external panel + native plugins (latest)" --notes "Automatically rebuilt on $(Get-Date -Format yyyy-MM-dd) from upstream $(git rev-parse --short upstream/main). tracedraw-plugins.zip holds only tracedraw.exe (what FDQ Nest installs); the setup and the portable zip are the whole program; the Android APK follows a few minutes later. Unsigned (Android: debug key)."
         shell: pwsh
+
+  # The Android APK of the same commit, added to the release the job above published (scripts/android/build.sh,
+  # docs/behavior/android.md): 64-bit ARM phones and tablets, and x86_64 for Chromebooks and the emulator.
+  android:
+    needs: update
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: native-plugins-latest
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android, x86_64-linux-android
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: android
+      - name: Build
+        env:
+          ANDROID_ABIS: arm64-v8a x86_64
+        run: |
+          export ANDROID_NDK_HOME="${ANDROID_NDK_LATEST_HOME:-$ANDROID_NDK_HOME}"
+          if [ ! -f "$ANDROID_HOME/platforms/android-36/android.jar" ]; then
+            yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" >/dev/null
+          fi
+          scripts/android/build.sh
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for apk in dist-android/*-debug.apk; do cp "$apk" "${apk%-debug.apk}-plugins.apk"; done
+          gh release upload native-plugins-latest dist-android/*-plugins.apk --repo ${{ github.repository }} --clobber

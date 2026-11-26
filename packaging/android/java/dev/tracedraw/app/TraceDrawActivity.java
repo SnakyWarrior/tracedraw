@@ -825,6 +825,29 @@ public class TraceDrawActivity extends NativeActivity {
         return done != null && done.booleanValue();
     }
 
+    /**
+     * Open `uri`, a native plugin's link (fork-only, native-plugins.md), in the app that takes
+     * it; the plugin shows its own panel over this activity, which stays in front and running.
+     * False when no app opens it.
+     */
+    public boolean launchPlugin(final String uri) {
+        Boolean done = onUiThread(new Callable<Boolean>() {
+            @Override
+            public Boolean call() {
+                Intent view = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                view.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    startActivity(view);
+                    return Boolean.TRUE;
+                } catch (ActivityNotFoundException e) {
+                    Log.i(TAG, "launchPlugin: no app opens " + uri);
+                    return Boolean.FALSE;
+                }
+            }
+        }, Boolean.FALSE);
+        return done != null && done.booleanValue();
+    }
+
     // ----- the system clipboard -----------------------------------------------
 
     /** The clipboard's text, or null when it holds none (or the app is not in front). */

@@ -1113,7 +1113,9 @@ impl DesktopOnly {
 
     /// Whether the option is shown on `platform`.
     pub fn shown_on(self, platform: crate::files::Platform) -> bool {
+        // fork-only: the agents' link serves FDQ Nest on Android too (native-plugins.md)
         platform == crate::files::Platform::Desktop
+            || (self == DesktopOnly::Agents && platform == crate::files::Platform::Android)
     }
 
     /// Whether the option is shown in this build.
@@ -6656,9 +6658,8 @@ mod tests {
         use crate::files::Platform;
         for o in DesktopOnly::ALL {
             assert!(o.shown_on(Platform::Desktop), "{o:?}");
-            assert!(!o.shown_on(Platform::Android), "{o:?}");
+            assert_eq!(o.shown_on(Platform::Android), o == DesktopOnly::Agents, "{o:?}");
             assert!(!o.shown_on(Platform::Web), "{o:?}");
-            assert_eq!(o.shown(), Platform::current() == Platform::Desktop);
         }
         let page = include_str!("options.rs");
         for gate in [

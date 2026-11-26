@@ -222,6 +222,16 @@ pub fn apply(ctx: &egui::Context, settings: &Settings, raw: &mut egui::RawInput)
     set(ctx, &settings.screen_margins, system, raw);
 }
 
+/// Fork-only: the physical pixels at the right that a native plugin's
+/// panel covers (FDQ Nest's window over TraceDraw on Android), told
+/// through the agents' link (`side_panel`, native-plugins.md): the
+/// interface keeps clear of them, as of a docker. 0 at every start.
+static SIDE_PANEL_PX: std::sync::atomic::AtomicU32 = std::sync::atomic::AtomicU32::new(0);
+
+pub fn set_side_panel(px: u32) {
+    SIDE_PANEL_PX.store(px, std::sync::atomic::Ordering::Relaxed);
+}
+
 /// Put the insets for `margins` and `system` in `raw` (always, so that
 /// margins set back to nothing take effect: egui keeps the last ones).
 pub fn set(
@@ -233,7 +243,9 @@ pub fn set(
     let zoom = ctx.zoom_factor();
     let native = raw.viewport().native_pixels_per_point.unwrap_or(1.0);
     let window = raw.screen_rect.map(|r| r.size()).unwrap_or_default();
-    let m = insets(margins, system, native * zoom, zoom, window);
+    let mut m = insets(margins, system, native * zoom, zoom, window);
+    let panel = SIDE_PANEL_PX.load(std::sync::atomic::Ordering::Relaxed) as f32 / (native * zoom).max(0.01);
+    m.right = m.right.max(panel.min(window.x * 0.8)); // the plugin's panel stands over the edge's own margin
     raw.safe_area_insets = Some(egui::SafeAreaInsets(m));
 }
 
