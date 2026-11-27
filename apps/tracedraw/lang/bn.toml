@@ -12519,6 +12519,7 @@ options.open_grid_panel_tip = "আরও গ্রিড সেটিং: মো
 menu.window.plugins = "Plugins" # en
 menu.window.plugins_manage = "Manage Plugins..." # en
 menu.window.plugins_import = "Import Plugin..." # en
+menu.window.plugins_import_desc = "Install a plugin (another program docked as a panel) from its .zip."
 dialog.native_plugins = "Plugin Manager" # en
 dialog.native_plugins_hint = "A plugin is another program on this computer, docked as a panel; Import Plugin installs one from its .zip (fork-only, see docs/behavior/native-plugins.md)." # en
 dialog.native_plugins_none = "No plugins are installed yet." # en

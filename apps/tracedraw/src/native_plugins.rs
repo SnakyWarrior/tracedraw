@@ -19,6 +19,8 @@
 
 use crate::app::App;
 use crate::i18n::{tr, trf};
+use crate::ui::btn_icons::IconUi;
+use crate::ui::tips::RichTip;
 
 #[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize, PartialEq, Eq)]
 pub struct NativePlugin {
@@ -278,9 +280,16 @@ pub fn manager(app: &mut App, ctx: &egui::Context, close: &mut bool) {
             });
         ui.add_space(6.0);
         ui.horizontal(|ui| {
-            install = ui.button(tr("menu.window.plugins_import")).clicked();
+            install = ui
+                .ibutton("menu.window.plugins_import")
+                .rich_tip(crate::ui::tips::keyed("menu.window.plugins_import"))
+                .clicked();
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                if ui.button(tr("dialog.close")).clicked() {
+                if ui
+                    .button(tr("dialog.close"))
+                    .rich_tip(crate::ui::tips::keyed("dialog.close"))
+                    .clicked()
+                {
                     *close = true;
                 }
             });
